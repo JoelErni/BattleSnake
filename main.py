@@ -125,7 +125,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
                         elif corr == corrRight:
                             is_move_safe['right'] == False
 
-
+    isfree(my_head)
     # Are there any safe moves left?
     safe_moves = []
     for move, isSafe in is_move_safe.items():
