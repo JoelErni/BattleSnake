@@ -16,6 +16,9 @@ import random
 import typing
 from xxlimited import foo
 
+def Euclidean_Distance(x,y) -> float:
+        result = math.sqrt(math.pow(x['x']-y['x'],2)+math.pow(x['y']-y['y'],2))
+        return result
 
 # info is called when you create your Battlesnake on play.battlesnake.com
 # and controls your Battlesnake's appearance
@@ -123,8 +126,3 @@ if __name__ == "__main__":
     from server import run_server
 
     run_server({"info": info, "start": start, "move": move, "end": end})
-
-
-def Euclidean_Distance(x,y) -> float:
-        result = math.sqrt(math.pow(x['x']-y['x'],2)+math.pow(x['y']-y['y'],2))
-        return result
