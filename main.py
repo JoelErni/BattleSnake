@@ -89,7 +89,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         is_move_safe["up"] = False
     
     #check body
-    
+    print(game_state['battlesnake']['body'])
 
 
     print(f"headpos: X:{my_head['x']}, Y:{my_head['y']}")
