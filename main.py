@@ -123,7 +123,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     if my_head['x'] == nearest_food['x']:
         if my_head['y'] < nearest_food['y']:
             next_move = "up"
-    next_move = "up"
+    next_move = "down"
 
     
 
