@@ -97,7 +97,14 @@ def move(game_state: typing.Dict) -> typing.Dict:
     directions = ['up', 'down', 'left', 'right']
     for x in directions:
         if is_move_safe[x] == True:
-            nextco = {'x':my_head['x'],'y':my_head['y']+1}
+            if x == 'up':
+                nextco = {'x':my_head['x'],'y':my_head['y']+1}
+            elif x == 'down':
+                nextco = {'x':my_head['x'],'y':my_head['y']-1}
+            elif x == 'left':
+                nextco = {'x':my_head['x']-1,'y':my_head['y']}
+            else:
+                nextco = {'x':my_head['x']+1,'y':my_head['y']}
             exits = 4
             if nextco['x']==body['x'] and nextco['y']==body['y']-1:
                 exits = exits -1
