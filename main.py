@@ -10,10 +10,12 @@
 # To get you started we've included code to prevent your Battlesnake from moving backwards.
 # For more info see docs.battlesnake.com
 
+from distutils.file_util import move_file
 from genericpath import exists
 from inspect import ismodule
 import math
 import random
+from sys import flags
 import typing
 from xxlimited import foo
 
@@ -94,35 +96,34 @@ def move(game_state: typing.Dict) -> typing.Dict:
                 is_move_safe["left"] = False
 
     #predict future
-    directions = ['up', 'down', 'left', 'right']
-    for x in directions:
-        if is_move_safe[x] == True:
-            if x == 'up':
-                nextco = {'x':my_head['x'],'y':my_head['y']+1}
-            elif x == 'down':
-                nextco = {'x':my_head['x'],'y':my_head['y']-1}
-            elif x == 'left':
-                nextco = {'x':my_head['x']-1,'y':my_head['y']}
-            elif x == 'right':
-                nextco = {'x':my_head['x']+1,'y':my_head['y']}
-
-            
-            exits = 0
+    def isfree(coordinate):
+        corrUp = {'x': coordinate['x'], 'y':coordinate['y']+1}
+        corrDown = {'x': coordinate['x'], 'y':coordinate['y']-1}
+        corrLeft = {'x': coordinate['x']-1, 'y':coordinate['y']}
+        corrRight = {'x': coordinate['x']+1, 'y':coordinate['y']}
+        directions = [corrUp, corrDown, corrLeft, corrRight]
+        for corr in directions:
             for snake in game_state['board']['snakes']:
                 for body in snake['body']:
-                    if nextco['x']==body['x'] and nextco['y']==body['y']-1:
-                        exits = exits +1
-                    if nextco['x']==body['x'] and nextco['y']==body['y']+1:
-                        exits = exits +1
-                    if nextco['y']==body['y'] and nextco['x']==body['x']-1:
-                        exits = exits +1
-                    if nextco['y']==body['y'] and nextco['x']==body['x']+1:
-                        exits = exits +1
-            #
-            print(exits)
-
-            if exits >= 3:
-                is_move_safe[x] == False
+                    no_exits = 0
+                    if corr['x']==body['x'] and corr['y']==body['y']-1:
+                        no_exits = no_exits + 1
+                    if corr['x']==body['x'] and corr['y']==body['y']+1:
+                        no_exits = no_exits + 1
+                    if corr['y']==body['y'] and corr['x']==body['x']-1:
+                        no_exits = no_exits + 1
+                    if corr['y']==body['y'] and corr['x']==body['x']+1:
+                        no_exits = no_exits + 1
+                    
+                    if no_exits >= 3:
+                        if corr == corrUp:
+                            is_move_safe['up'] = False
+                        elif corr == corrDown:
+                            is_move_safe['down'] = False
+                        elif corr == corrLeft:
+                            is_move_safe['left'] == False
+                        elif corr == corrRight:
+                            is_move_safe['right'] == False
 
 
     # Are there any safe moves left?
