@@ -114,7 +114,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     food_distance = []
     for x in food:
         food_distance.append([food,math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2))])
-    print(food_distance)
+    print(min(food_distance))
 
 
     print(f"MOVE {game_state['turn']}: {next_move}")
