@@ -11,8 +11,10 @@
 # For more info see docs.battlesnake.com
 
 from inspect import ismodule
+import math
 import random
 import typing
+from xxlimited import foo
 
 
 # info is called when you create your Battlesnake on play.battlesnake.com
@@ -75,8 +77,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
         is_move_safe["down"] = False
     if my_head['y'] == board_height-1:
         is_move_safe["up"] = False
+    #Check corner
+
 
     # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
+    # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
     for snake in game_state['board']['snakes']:
         for body in snake['body']:
             if my_head['x']==body['x'] and my_head['y']==body['y']-1:
@@ -87,9 +92,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
                 is_move_safe["right"] = False
             if my_head['y']==body['y'] and my_head['x']==body['x']+1:
                 is_move_safe["left"] = False
-
-    # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
-    
 
     # Are there any safe moves left?
     safe_moves = []
@@ -105,7 +107,12 @@ def move(game_state: typing.Dict) -> typing.Dict:
     next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-    # food = game_state['board']['food']
+    food = game_state['board']['food']
+    food_distance = []
+    for x in food:
+        food_distance.append([food,Euclidean_Distance(my_head, food)])
+    print(food_distance)
+
 
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
@@ -116,3 +123,8 @@ if __name__ == "__main__":
     from server import run_server
 
     run_server({"info": info, "start": start, "move": move, "end": end})
+
+
+def Euclidean_Distance(x,y) -> float:
+        result = math.sqrt(math.pow(x['x']-y['x'],2)+math.pow(x['y']-y['y'],2))
+        return result
