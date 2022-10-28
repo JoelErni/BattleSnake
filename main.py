@@ -10,6 +10,7 @@
 # To get you started we've included code to prevent your Battlesnake from moving backwards.
 # For more info see docs.battlesnake.com
 
+from inspect import ismodule
 import random
 import typing
 
@@ -84,14 +85,17 @@ def move(game_state: typing.Dict) -> typing.Dict:
         is_move_safe["up"] = False
 
     for body in game_state['you']['body']:
-        if my_head['y']==body['y'] and my_head['x']+1==body['x']:
-            is_move_safe["right"]==False
-        if my_head['y']==body['y'] and my_head['x']-1==body['x']:
-            is_move_safe["left"]==False
-        if my_head['x']==body['x'] and my_head['y']+1==body['y']:
-            is_move_safe["up"]==False
-        if my_head['x']==body['x'] and my_head['y']-1==body['y']:
-            is_move_safe["down"]==False
+        if body['x'] == my_head['x']:
+            if body['y']==my_head['y']+1:
+                is_move_safe["up"]
+            elif body['y']==my_head['y']-1:
+                is_move_safe["down"]
+        elif body['y'] == my_head['y']:
+            if body['x']==my_head['x']+1:
+                is_move_safe["right"]
+            elif body['x']==my_head['x']-1:
+                is_move_safe["left"]
+
 
     print(f"headpos: X:{my_head['x']}, Y:{my_head['y']}")
 
