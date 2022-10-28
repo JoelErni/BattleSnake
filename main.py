@@ -113,7 +113,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     food = game_state['board']['food']
     food_distance = []
     for x in food:
-        food_distance.append([food,Euclidean_Distance(my_head, food)])
+        food_distance.append([food,math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2))])
     print(food_distance)
 
 
