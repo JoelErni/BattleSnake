@@ -86,11 +86,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for body in game_state['you']['body']:
         if my_head['y']==body['y'] and my_head['x']+1==body['x']:
             is_move_safe["right"]==False
-        elif my_head['y']==body['y'] and my_head['x']-1==body['x']:
+        if my_head['y']==body['y'] and my_head['x']-1==body['x']:
             is_move_safe["left"]==False
-        elif my_head['x']==body['x'] and my_head['y']+1==body['y']:
+        if my_head['x']==body['x'] and my_head['y']+1==body['y']:
             is_move_safe["up"]==False
-        elif my_head['x']==body['x'] and my_head['y']-1==body['y']:
+        if my_head['x']==body['x'] and my_head['y']-1==body['y']:
             is_move_safe["down"]==False
 
     print(f"headpos: X:{my_head['x']}, Y:{my_head['y']}")
