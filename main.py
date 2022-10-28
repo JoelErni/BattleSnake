@@ -120,14 +120,20 @@ def move(game_state: typing.Dict) -> typing.Dict:
     print(f"snake:{my_head}\nnearest fruit:{nearest_food}")
     
     next_move = ""
-    if my_head['x'] < nearest_food['x'] and is_move_safe['left'] in safe_moves:
+    if my_head['x'] == nearest_food['x']:
+        if my_head['y'] < nearest_food['y'] and is_move_safe['up'] in safe_moves:
+            next_move = "up"
+        elif my_head['y'] > nearest_food['y'] and is_move_safe['down'] in safe_moves:
+            next_move = "down"
+    elif my_head['x'] < nearest_food['x'] and is_move_safe['left'] in safe_moves:
         next_move = "left"
     elif my_head['x'] > nearest_food['x'] and is_move_safe['right'] in safe_moves:
         next_move = "right"
-    elif my_head['y'] < nearest_food['y'] and is_move_safe['up'] in safe_moves:
-        next_move = "up"
-    elif my_head['y'] > nearest_food['y'] and is_move_safe['down'] in safe_moves:
-        next_move = "down"
+    else:
+        next_move = random.choice(safe_moves)
+
+    
+
 
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
