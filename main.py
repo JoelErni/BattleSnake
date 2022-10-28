@@ -16,6 +16,7 @@ from inspect import ismodule
 import math
 import random
 from secrets import choice
+import string
 from subprocess import check_output
 from sys import flags
 import typing
@@ -44,7 +45,6 @@ def start(game_state: typing.Dict):
 # end is called when your Battlesnake finishes a game
 def end(game_state: typing.Dict):
     print("GAME OVER\n")
-
 
 # move is called on every turn and returns your next move
 # Valid moves are "up", "down", "left", or "right"
@@ -113,23 +113,21 @@ def move(game_state: typing.Dict) -> typing.Dict:
     food_distance = []
     for x in food:
         food_distance.append(math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2)))
-    print(f"Nearest food:{food_distance.index(min(food_distance))},{min(food_distance)}")
 
-    for x in safe_moves:
-        nearest_food = game_state['board']['food'][food_distance.index(min(food_distance))]
-        if my_head['x'] < nearest_food['x'] and is_move_safe['up'] in safe_moves:
-            next_move = 'up'
-        elif my_head['x'] > nearest_food['x'] and is_move_safe['down'] in safe_moves:
-            next_move = 'down'
-        elif my_head['y'] < nearest_food['y'] and is_move_safe['right'] in safe_moves:
-            next_move = 'right'
-        elif my_head['y'] > nearest_food['y'] and is_move_safe['left'] in safe_moves:
-            next_move = 'left'
-        else:
-            next_move = random.choice(safe_moves)
-
-        
+    nearest_food = game_state['board']['food'][food_distance.index(min(food_distance))]
     
+
+    print(f"snake:{my_head}\nnearest fruit:{nearest_food}")
+    
+    next_move = ""
+    if my_head['x'] < nearest_food['x'] and is_move_safe['left'] in safe_moves:
+        next_move = "left"
+    elif my_head['x'] > nearest_food['x'] and is_move_safe['right'] in safe_moves:
+        next_move = "right"
+    elif my_head['y'] < nearest_food['y'] and is_move_safe['up'] in safe_moves:
+        next_move = "up"
+    elif my_head['y'] > nearest_food['y'] and is_move_safe['down'] in safe_moves:
+        next_move = "down"
 
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
