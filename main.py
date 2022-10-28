@@ -15,6 +15,8 @@ from genericpath import exists
 from inspect import ismodule
 import math
 import random
+from secrets import choice
+from subprocess import check_output
 from sys import flags
 import typing
 from xxlimited import foo
@@ -79,8 +81,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
         is_move_safe["down"] = False
     if my_head['y'] == board_height-1:
         is_move_safe["up"] = False
-    #Check corner
-
 
     # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
     # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
@@ -95,7 +95,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if my_head['y']==body['y'] and my_head['x']==body['x']+1:
                 is_move_safe["left"] = False
 
-        # Are there any safe moves left?
+    # Are there any safe moves left?
     safe_moves = []
     for move, isSafe in is_move_safe.items():
         if isSafe:
@@ -106,7 +106,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         return {"move": "down"}
 
     # Choose a random move from the safe ones
-    next_move = random.choice(safe_moves)
+    # next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
@@ -114,6 +114,21 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for x in food:
         food_distance.append(math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2)))
     print(f"Nearest food:{food_distance.index(min(food_distance))},{min(food_distance)}")
+
+    for x in safe_moves:
+        nearest_food = game_state['board']['food'][food_distance.index(min(food_distance))]
+        if my_head['x'] < nearest_food['x'] and is_move_safe['up'] in safe_moves:
+            next_move = 'up'
+        elif my_head['x'] > nearest_food['x'] and is_move_safe['down'] in safe_moves:
+            next_move = 'down'
+        elif my_head['y'] < nearest_food['y'] and is_move_safe['right'] in safe_moves:
+            next_move = 'right'
+        elif my_head['y'] > nearest_food['y'] and is_move_safe['left'] in safe_moves:
+            next_move = 'left'
+        else:
+            next_move = random.choice(safe_moves)
+
+        
     
 
     print(f"MOVE {game_state['turn']}: {next_move}")
