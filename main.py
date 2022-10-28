@@ -118,7 +118,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
                         exits = exits -1
                     if nextco['y']==body['y'] and nextco['x']==body['x']+1:
                         exits = exits -1
-            
+            #
             print(exits)
 
             if exits <= 0:
