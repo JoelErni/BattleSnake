@@ -95,38 +95,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if my_head['y']==body['y'] and my_head['x']==body['x']+1:
                 is_move_safe["left"] = False
 
-    #predict future
-    def isfree(coordinate):
-        corrUp = {'x': coordinate['x'], 'y':coordinate['y']+1}
-        corrDown = {'x': coordinate['x'], 'y':coordinate['y']-1}
-        corrLeft = {'x': coordinate['x']-1, 'y':coordinate['y']}
-        corrRight = {'x': coordinate['x']+1, 'y':coordinate['y']}
-        directions = [corrUp, corrDown, corrLeft, corrRight]
-        for corr in directions:
-            for snake in game_state['board']['snakes']:
-                for body in snake['body']:
-                    no_exits = 0
-                    if corr['x']==body['x'] and corr['y']==body['y']-1:
-                        no_exits = no_exits + 1
-                    if corr['x']==body['x'] and corr['y']==body['y']+1:
-                        no_exits = no_exits + 1
-                    if corr['y']==body['y'] and corr['x']==body['x']-1:
-                        no_exits = no_exits + 1
-                    if corr['y']==body['y'] and corr['x']==body['x']+1:
-                        no_exits = no_exits + 1
-                    
-                    if no_exits >= 3:
-                        if corr == corrUp:
-                            is_move_safe['up'] = False
-                        elif corr == corrDown:
-                            is_move_safe['down'] = False
-                        elif corr == corrLeft:
-                            is_move_safe['left'] == False
-                        elif corr == corrRight:
-                            is_move_safe['right'] == False
-
-    isfree(my_head)
-    # Are there any safe moves left?
+        # Are there any safe moves left?
     safe_moves = []
     for move, isSafe in is_move_safe.items():
         if isSafe:
