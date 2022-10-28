@@ -13,8 +13,6 @@
 import random
 import typing
 
-from requests import head
-
 
 # info is called when you create your Battlesnake on play.battlesnake.com
 # and controls your Battlesnake's appearance
@@ -89,9 +87,12 @@ def move(game_state: typing.Dict) -> typing.Dict:
         is_move_safe["down"] = False
     elif my_head['y'] == board_height-1:
         is_move_safe["up"] = False
+    
+    #check body
+    
 
-        
-    print(game_state['you']['body'])
+
+    print(f"headpos: X:{my_head['x']}, Y:{my_head['y']}")
 
     # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
     # my_body = game_state['you']['body']
