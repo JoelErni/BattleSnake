@@ -65,39 +65,23 @@ def move(game_state: typing.Dict) -> typing.Dict:
     board_width = game_state['board']['width']
     board_height = game_state['board']['height']
 
-    #check corner
-    if my_head['x'] == 0 and my_head['y']==0:
-        is_move_safe["left"] = False
-        is_move_safe["down"] = False
-    elif my_head['x'] == 0 and my_head['y']==board_height-1:
-        is_move_safe["left"] = False
-        is_move_safe["up"] = False
-    elif my_head['x'] == board_width-1 and my_head['y']==0:
-        is_move_safe["right"] = False
-        is_move_safe["down"] = False
-    elif my_head['x'] == board_width-1 and my_head['y']==board_height-1:
-        is_move_safe["right"] = False
-        is_move_safe["up"] = False
     #Check sides
-    elif my_head['x'] == 0:
+    if my_head['x'] == 0:
         is_move_safe["left"] = False
+        if my_head['y']==0:
+            is_move_safe["down"] = False
+        elif my_head['y'] == board_height-1:
+            is_move_safe['up']==False
     elif my_head['x'] == board_width-1:
         is_move_safe["right"] = False
+        if my_head['y']==0:
+            is_move_safe["down"] = False
+        elif my_head['y'] == board_height-1:
+            is_move_safe['up']==False
     elif my_head['y'] == 0:
         is_move_safe["down"] = False
     elif my_head['y'] == board_height-1:
         is_move_safe["up"] = False
-    
-    #check body
-    for body in game_state['you']['body']:
-        if my_head['y'] == body['y']+1:
-            is_move_safe["up"] = False
-        elif my_head['y'] == body['y']-1:
-            is_move_safe["down"] = False
-        elif my_head['x'] == body['x']+1:
-            is_move_safe["right"] = False
-        elif my_head['x'] == body['x']-1:
-            is_move_safe["left"] = False
 
 
     print(f"headpos: X:{my_head['x']}, Y:{my_head['y']}")
