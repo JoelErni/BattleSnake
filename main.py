@@ -107,21 +107,21 @@ def move(game_state: typing.Dict) -> typing.Dict:
                 nextco = {'x':my_head['x']+1,'y':my_head['y']}
 
             
-            exits = 3
+            exits = 0
             for snake in game_state['board']['snakes']:
                 for body in snake['body']:
                     if nextco['x']==body['x'] and nextco['y']==body['y']-1:
-                        exits = exits -1
+                        exits = exits +1
                     if nextco['x']==body['x'] and nextco['y']==body['y']+1:
-                        exits = exits -1
+                        exits = exits +1
                     if nextco['y']==body['y'] and nextco['x']==body['x']-1:
-                        exits = exits -1
+                        exits = exits +1
                     if nextco['y']==body['y'] and nextco['x']==body['x']+1:
-                        exits = exits -1
+                        exits = exits +1
             #
             print(exits)
 
-            if exits <= 0:
+            if exits >= 3:
                 is_move_safe[x] == False
 
 
