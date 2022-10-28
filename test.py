@@ -1,12 +1,6 @@
 import math
-
-c1 = {'x': 0, 'y': 0}
-c2 = {'x': 4, 'y': 3}
-
-
-
-def Euclidean_Distance(x,y) -> float:
-    result = math.sqrt(math.pow(x['x']-y['x'],2)+math.pow(x['y']-y['y'],2))
-    return result
-
-print(Euclidean_Distance(c1,c2))
+n = {'x': 0, 'y': 0}
+c1 = [{'x': 4, 'y': 3},{'x': 3, 'y': 6},{'x': 4, 'y': 8}]
+res={}
+for x in c1:
+    res[n] = math.sqrt(math.pow(n['x']-x['x'],2)+math.pow(n['y']-x['y'],2))

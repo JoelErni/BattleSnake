@@ -111,11 +111,12 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
-    food_distance = []
+    food_distance = {}
+    food_index = 0
     for x in food:
-        food_distance.append([food,math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2))])
-    print(min(food_distance))
-
+        food_distance[food_index]=math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2))
+        food_index=food_distance+1
+    print(min(food_distance, key=food_distance.get))
 
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
