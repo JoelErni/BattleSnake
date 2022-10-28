@@ -103,9 +103,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
                 nextco = {'x':my_head['x'],'y':my_head['y']-1}
             elif x == 'left':
                 nextco = {'x':my_head['x']-1,'y':my_head['y']}
-            else:
+            elif x == 'right':
                 nextco = {'x':my_head['x']+1,'y':my_head['y']}
-            exits = 4
+
+            
+            exits = 3
             if nextco['x']==body['x'] and nextco['y']==body['y']-1:
                 exits = exits -1
             if nextco['x']==body['x'] and nextco['y']==body['y']+1:
@@ -115,7 +117,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if nextco['y']==body['y'] and nextco['x']==body['x']+1:
                 exits = exits -1
             
-            if exits == 0:
+            if exits <= 0:
                 is_move_safe[x] == False
 
 
