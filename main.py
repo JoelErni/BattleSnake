@@ -87,9 +87,9 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for body in game_state['you']['body']:
         if body['x'] == my_head['x']:
             if body['y']==my_head['y']+1:
-                is_move_safe["up"]
-            elif body['y']==my_head['y']-1:
                 is_move_safe["down"]
+            elif body['y']==my_head['y']-1:
+                is_move_safe["up"]
         elif body['y'] == my_head['y']:
             if body['x']==my_head['x']+1:
                 is_move_safe["right"]
