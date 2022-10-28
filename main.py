@@ -68,11 +68,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     if my_head['x'] == 0:
         is_move_safe["left"] = False
-    elif my_head['x'] == board_width:
+    elif my_head['x'] == board_width-1:
         is_move_safe["right"] = False
     elif my_head['y'] == 0:
         is_move_safe["down"] = False
-    elif my_head['x'] == board_height:
+    elif my_head['x'] == board_height-1:
         is_move_safe["up"] = False
 
     print(f"headpos: X:{my_head['x']}, Y:{my_head['y']}")
