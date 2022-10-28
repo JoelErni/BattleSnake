@@ -10,15 +10,12 @@
 # To get you started we've included code to prevent your Battlesnake from moving backwards.
 # For more info see docs.battlesnake.com
 
+from genericpath import exists
 from inspect import ismodule
 import math
 import random
 import typing
 from xxlimited import foo
-
-def Euclidean_Distance(x,y) -> float:
-        result = math.sqrt(math.pow(x['x']-y['x'],2)+math.pow(x['y']-y['y'],2))
-        return result
 
 # info is called when you create your Battlesnake on play.battlesnake.com
 # and controls your Battlesnake's appearance
@@ -96,6 +93,25 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if my_head['y']==body['y'] and my_head['x']==body['x']+1:
                 is_move_safe["left"] = False
 
+    #predict future
+    directions = ['up', 'down', 'left', 'right']
+    for x in directions:
+        if is_move_safe[x] == True:
+            nextco = {'x':my_head['x'],'y':my_head['y']+1}
+            exits = 4
+            if nextco['x']==body['x'] and nextco['y']==body['y']-1:
+                exits = exits -1
+            if nextco['x']==body['x'] and nextco['y']==body['y']+1:
+                exits = exits -1
+            if nextco['y']==body['y'] and nextco['x']==body['x']-1:
+                exits = exits -1
+            if nextco['y']==body['y'] and nextco['x']==body['x']+1:
+                exits = exits -1
+            
+            if exits == 0:
+                is_move_safe[x] == False
+
+
     # Are there any safe moves left?
     safe_moves = []
     for move, isSafe in is_move_safe.items():
@@ -114,7 +130,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
     food_distance = []
     for x in food:
         food_distance.append(math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2)))
-    print(food_distance.index(min(food_distance)))
+    print(f"Nearest food:{food_distance.index(min(food_distance))},{min(food_distance)}")
+    
 
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
