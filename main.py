@@ -109,29 +109,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
     # Choose a random move from the safe ones
     # next_move = random.choice(safe_moves)
 
-    # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-    food = game_state['board']['food']
-    food_distance = []
-    for x in food:
-        food_distance.append(math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2)))
-
-    nearest_food = game_state['board']['food'][food_distance.index(min(food_distance))]
-    print(f"snake:{my_head}\nnearest fruit:{nearest_food}")
-    
-    next_move = ""
-    if my_head['x'] == nearest_food['x']:
-        if my_head['y'] < nearest_food['y']:
-            next_move = "up"
-        elif my_head['y'] > nearest_food['y']:
-            next_move = 'down'
-    elif my_head['x'] < nearest_food['x']:
-        next_move = "right"
-    elif my_head['x'] > nearest_food['x']:
-        next_move = "left"
-        
-    if not next_move in safe_moves:
-        next_move = random.choice(safe_moves)
-
     #get free surface
     totalSurface = game_state['board']['width']*game_state['board']['height']
     takenSurface = 0
@@ -174,6 +151,37 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     floodfill(map, my_head['x'], my_head['y'])
     print(mapoutput(map))
+
+    aCount = 0
+    cCount = 0
+    for x in map:
+        aCount = aCount + x.count('a')
+        cCount = cCount + x.count('c')
+    print(aCount,cCount)
+
+    # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
+    food = game_state['board']['food']
+    food_distance = []
+    for x in food:
+        food_distance.append(math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2)))
+
+    nearest_food = game_state['board']['food'][food_distance.index(min(food_distance))]
+    print(f"snake:{my_head}\nnearest fruit:{nearest_food}")
+    
+    next_move = ""
+    if my_head['x'] == nearest_food['x']:
+        if my_head['y'] < nearest_food['y']:
+            next_move = "up"
+        elif my_head['y'] > nearest_food['y']:
+            next_move = 'down'
+    elif my_head['x'] < nearest_food['x']:
+        next_move = "right"
+    elif my_head['x'] > nearest_food['x']:
+        next_move = "left"
+        
+    if not next_move in safe_moves:
+        next_move = random.choice(safe_moves)
+
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
 # Start server when `python main.py` is run
