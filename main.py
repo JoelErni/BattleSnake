@@ -175,16 +175,27 @@ def move(game_state: typing.Dict) -> typing.Dict:
     elif my_head['x'] > nearest_food['x']:
         next_move = "left"
 
+    #Rechts
     if not my_head['x']==board_width-1:
         rechts = map[my_head['y']][my_head['x']+1]
     else:
         rechts = ''
-
+    #links
     if not my_head['x']==0:
         links = map[my_head['y']][my_head['x']-1]
     else:
         links = ''
-    print(f'rechts:{str(rechts)}, links:{str(links)}')
+    #oben
+    if not my_head['y']==board_height-1:
+        oben = map[my_head['y']+1][my_head['x']]
+    else:
+        oben = ''
+    #unten
+    if not my_head['y']==0:
+        unten = map[my_head['y']-1][my_head['x']]
+    else:
+        unten = ''
+    print(f'oben:{oben}, unten: {unten}, links:{str(links)}, rechts:{str(rechts)}')
 
     if not next_move in safe_moves:
         next_move = random.choice(safe_moves)
