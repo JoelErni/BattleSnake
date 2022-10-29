@@ -175,8 +175,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
     elif my_head['x'] > nearest_food['x']:
         next_move = "left"
 
-    links = map[my_head['y']][my_head['x']+1]
-    rechts = map[my_head['y']][my_head['x']-1]
+    links = map[abs(my_head['y']-board_height-1)][my_head['x']+1]
+    rechts = map[abs(my_head['y']-board_height-1)][my_head['x']-1]
 
     print(links, rechts)
 
