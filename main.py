@@ -200,22 +200,22 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     if not next_move in safe_moves:
         if aCount > cCount:
-            if oben == 'a':
+            if oben == 'a' and 'up' in safe_moves:
                 next_move = 'up'
-            elif unten == 'a':
+            elif unten == 'a' and 'down' in safe_moves:
                 next_move = 'down'
-            elif rechts == 'a':
+            elif rechts == 'a' and 'right' in safe_moves:
                 next_move = 'right'
-            elif links == 'a':
+            elif links == 'a' and'left' in safe_moves:
                 next_move = 'left'
         elif cCount > aCount:
-            if oben == 'c':
+            if oben == 'c' and'up' in safe_moves:
                 next_move = 'up'
-            elif unten == 'c':
+            elif unten == 'c' and'down' in safe_moves:
                 next_move = 'down'
-            elif rechts == 'c':
+            elif rechts == 'c' and'right' in safe_moves:
                 next_move = 'right'
-            elif links == 'c':
+            elif links == 'c' and'left' in safe_moves:
                 next_move = 'left'
         elif cCount == aCount:
             next_move = random.choice(safe_moves)
