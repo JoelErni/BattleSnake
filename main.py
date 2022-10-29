@@ -133,19 +133,26 @@ def move(game_state: typing.Dict) -> typing.Dict:
             output = output + "\n"
         return output
 
-    def floodfill(matrix, x, y):
-        if matrix[x][y] == "a":  
-            matrix[x][y] = "c" 
-            if x > 0:
-                floodfill(matrix,x-1,y)
-            if x < len(matrix[y]) - 1:
-                floodfill(matrix,x+1,y)
-            if y > 0:
-                floodfill(matrix,x,y-1)
-            if y < len(matrix) - 1:
-                floodfill(matrix,x,y+1)
+    def flood_fill(x ,y, old, new):
+        # we need the x and y of the start position, the old value,
+        # and the new value
+        # the flood fill has 4 parts
+        # firstly, make sure the x and y are inbounds
+        if x < 0 or x >= len(map[0]) or y < 0 or y >= len(map):
+            return
+        # secondly, check if the current position equals the old value
+        if map[y][x] != old:
+            return
+        
+        # thirdly, set the current position to the new value
+        map[y][x] = new
+        # fourthly, attempt to fill the neighboring positions
+        flood_fill(x+1, y, old, new)
+        flood_fill(x-1, y, old, new)
+        flood_fill(x, y+1, old, new)
+        flood_fill(x, y-1, old, new)
 
-    floodfill(map, my_head['x'], my_head['y'])
+    flood_fill(my_head['x'], my_head['y'], 'a','c')
     print(mapoutput(map))
 
     aCount = 0
