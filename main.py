@@ -172,7 +172,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if y < len(matrix) - 1:
                 floodfill(matrix,x,y+1)
 
-    floodfill(map, my_head['x']+1, my_head['y']+1)
+    floodfill(map, my_head['x'], my_head['y'])
     print(mapoutput(map))
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
