@@ -115,7 +115,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     print(f"Total:{totalSurface}, Taken:{takenSurface}, Free:{freeSurface}")
 
     map = []
-    for y in reversed(range(game_state['board']['height'])):
+    for y in range(game_state['board']['height']):
         map1 = ['a'] * game_state['board']['height']
         for x in range(game_state['board']['width']):
             for snake in game_state['board']['snakes']:
@@ -175,8 +175,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
     elif my_head['x'] > nearest_food['x']:
         next_move = "left"
 
-    oben = map[abs(my_head['y']-board_height-1)][my_head['x']]
-    print('oben:'+str(oben))
+    mid = map[my_head['y']][my_head['x']]
+    print('mid:'+str(mid))
 
     if not next_move in safe_moves:
         next_move = random.choice(safe_moves)
