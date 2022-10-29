@@ -145,15 +145,18 @@ def move(game_state: typing.Dict) -> typing.Dict:
     print(f"Total:{totalSurface}\nTaken:{takenSurface}\nFree:{freeSurface}")
 
     map = []
-    for y in range(game_state['board']['height']):
+    for y in reversed(range(game_state['board']['height'])):
         map1 = [0] * game_state['board']['height']
-        for x in reversed(range(game_state['board']['width'])):
+        for x in range(game_state['board']['width']):
             for snake in game_state['board']['snakes']:
                 for body in snake['body']:
                     if body['x'] == x and body['y'] == y:
                         map1[x] = 1
                         break
         map.append(map1)
+    flippedmap=[]
+    for x in reversed(map):
+        flippedmap.append(x)
 
     def mapoutput(mapinput) -> str:
         output = ""
