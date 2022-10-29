@@ -146,12 +146,12 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     map = []
     for y in reversed(range(game_state['board']['height'])):
-        map1 = [0] * game_state['board']['height']
+        map1 = ['a'] * game_state['board']['height']
         for x in range(game_state['board']['width']):
             for snake in game_state['board']['snakes']:
                 for body in snake['body']:
                     if body['x'] == x and body['y'] == y:
-                        map1[x] = 1
+                        map1[x] = 'b'
                         break
         map.append(map1)
     flippedmap=[]
@@ -165,11 +165,23 @@ def move(game_state: typing.Dict) -> typing.Dict:
                 output = output + str(mapinput[x][y])
             output = output + "\n"
         return output
+
+    def floodfill(matrix, x, y):
+        if matrix[x][y] == "a":  
+            matrix[x][y] = "c" 
+            if x > 0:
+                floodfill(matrix,x-1,y)
+            if x < len(matrix[y]) - 1:
+                floodfill(matrix,x+1,y)
+            if y > 0:
+                floodfill(matrix,x,y-1)
+            if y < len(matrix) - 1:
+                floodfill(matrix,x,y+1)
+
+    floodfill(map)
     print(mapoutput(map))
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
-
-
 # Start server when `python main.py` is run
 if __name__ == "__main__":
     from server import run_server
