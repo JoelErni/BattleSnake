@@ -1,2 +1,3 @@
 for x in range(11):
-    print(x)
+    for y in range(11):
+        print(y)
