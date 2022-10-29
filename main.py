@@ -147,7 +147,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         for x in game_state['board']['width']:
             for snake in game_state['board']['snakes']:
                 for body in snake['body']:
-                    if body == {'x': x, 'y': y}:
+                    if body['x'] == x and body['y'] == y:
                         map1.append(1)
                     else:
                         map1.append(0)
