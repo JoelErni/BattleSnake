@@ -143,7 +143,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             takenSurface=takenSurface+1
     freeSurface = totalSurface - takenSurface
     print(f"Total:{totalSurface}\nTaken:{takenSurface}\nFree:{freeSurface}")
-    
+
     map = []
     for y in range(game_state['board']['height']):
         map1 = [0] * game_state['board']['height']
@@ -155,7 +155,13 @@ def move(game_state: typing.Dict) -> typing.Dict:
                         break
         map.append(map1)
 
-    print(map)
+    def mapoutput(mapinput):
+        output = ""
+        for x in range(len(mapinput)):
+            for y in range(len(mapinput[x])):
+                output = output + mapinput[x][y]
+            output = output + "\n"
+    print(mapoutput(map))
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
 
