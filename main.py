@@ -15,6 +15,7 @@ from distutils.file_util import move_file
 from genericpath import exists
 from inspect import ismodule
 import math
+from os import link
 import random
 from re import A
 from secrets import choice
@@ -95,6 +96,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
                 is_move_safe["right"] = False
             if my_head['y']==body['y'] and my_head['x']==body['x']+1:
                 is_move_safe["left"] = False
+
+
 
     # Are there any safe moves left?
     safe_moves = []
@@ -179,6 +182,31 @@ def move(game_state: typing.Dict) -> typing.Dict:
     elif my_head['x'] > nearest_food['x']:
         next_move = "left"
         
+    #acount and ccount
+    oben = map[my_head['x']][my_head['y']-1]
+    unten = map[my_head['x']][my_head['y']+1]
+    links =  map[my_head['x']-1][my_head['y']]
+    rechts = map[my_head['x']+1][my_head['y']]
+
+    if aCount > cCount:
+        if oben == 'a':
+            next_move='up'
+        elif unten == 'a':
+            next_move='down'
+        elif links == 'a':
+            next_move='left'
+        elif rechts == 'a':
+            next_move='right'
+    elif aCount < cCount:
+        if oben == 'c':
+            next_move='up'
+        elif unten == 'c':
+            next_move='down'
+        elif links == 'c':
+            next_move='left'
+        elif rechts == 'c':
+            next_move='right'
+
     if not next_move in safe_moves:
         next_move = random.choice(safe_moves)
 
