@@ -192,7 +192,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         oben = ''
     #unten
     if not my_head['y']==0:
-        unten = map[my_head['y']-1][my_head['x']]
+        unten = map[game_state['you']['body'][0]['y']-1][game_state['you']['body'][0]['x']]
     else:
         unten = ''
     bac = [oben, unten, links, rechts]
