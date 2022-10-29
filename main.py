@@ -143,16 +143,16 @@ def move(game_state: typing.Dict) -> typing.Dict:
             takenSurface=takenSurface+1
     freeSurface = totalSurface - takenSurface
     print(f"Total:{totalSurface}\nTaken:{takenSurface}\nFree:{freeSurface}")
+    
     map = []
     for y in range(game_state['board']['height']):
-        map1 = []
+        map1 = [0] * game_state['board']['height']
         for x in range(game_state['board']['width']):
             for snake in game_state['board']['snakes']:
                 for body in snake['body']:
                     if body['x'] == x and body['y'] == y:
-                        map1.append(1)
+                        map1[x] = 1
                         break
-            map1.append(0)
         map.append(map1)
 
     print(map)
