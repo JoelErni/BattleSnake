@@ -52,7 +52,6 @@ def end(game_state: typing.Dict):
 # Valid moves are "up", "down", "left", or "right"
 # See https://docs.battlesnake.com/api/example-move for available data
 def move(game_state: typing.Dict) -> typing.Dict:
-    print(f"MOVE {game_state['turn']}: {next_move}")
     is_move_safe = {"up": True, "down": True, "left": True, "right": True}
 
     # We've included code to prevent your Battlesnake from moving backwards
@@ -175,6 +174,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     floodfill(map, my_head['x'], my_head['y'])
     print(mapoutput(map))
+    print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
 # Start server when `python main.py` is run
 if __name__ == "__main__":
