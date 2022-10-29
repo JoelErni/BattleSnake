@@ -160,6 +160,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for x in map:
         aCount = aCount + x.count('a')
         cCount = cCount + x.count('c')
+    print(aCount,cCount)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
@@ -180,11 +181,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = "right"
     elif my_head['x'] > nearest_food['x']:
         next_move = "left"
-    up = map[my_head['x']][my_head['y']-1]
-    down = map[my_head['x']][my_head['y']+1]
-    left = map[my_head['x']-1][my_head['y']]
-    right = map[my_head['x']+1][my_head['y']]
-    print(up, down, left, right)
 
     if not next_move in safe_moves:
         next_move = random.choice(safe_moves)
