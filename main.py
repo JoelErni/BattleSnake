@@ -22,6 +22,7 @@ from secrets import choice
 import string
 from subprocess import check_output
 from sys import flags
+from turtle import right
 import typing
 from xxlimited import foo
 
@@ -181,6 +182,13 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = "right"
     elif my_head['x'] > nearest_food['x']:
         next_move = "left"
+
+    up=map[my_head['y']+1][my_head['x']]
+    down=map[my_head['y']-1][my_head['x']]
+    left=map[my_head['y']][my_head['x']-1]
+    right=map[my_head['y']][my_head['x']+1]
+
+    print(up,down, left, right)
 
     if not next_move in safe_moves:
         next_move = random.choice(safe_moves)
