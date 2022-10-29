@@ -155,12 +155,13 @@ def move(game_state: typing.Dict) -> typing.Dict:
                         break
         map.append(map1)
 
-    def mapoutput(mapinput):
+    def mapoutput(mapinput) -> str:
         output = ""
         for x in range(len(mapinput)):
             for y in range(len(mapinput[x])):
                 output = output + str(mapinput[x][y])
             output = output + "\n"
+        return output
     print(mapoutput(map))
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
