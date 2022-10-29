@@ -147,20 +147,15 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for y in range(game_state['board']['height']):
         map1 = []
         for x in range(game_state['board']['width']):
-            a = False
             for snake in game_state['board']['snakes']:
                 for body in snake['body']:
                     if body['x'] == x and body['y'] == y:
-                        a = True
                         map1.append(1)
-                        break
-                if a:
-                    break
-            if a:
-                break
+            continue
+            map1.append(0)
         map.append(map1)
 
-
+    print(map)
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
 
