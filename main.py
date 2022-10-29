@@ -10,11 +10,13 @@
 # To get you started we've included code to prevent your Battlesnake from moving backwards.
 # For more info see docs.battlesnake.com
 
+from curses import beep
 from distutils.file_util import move_file
 from genericpath import exists
 from inspect import ismodule
 import math
 import random
+from re import A
 from secrets import choice
 import string
 from subprocess import check_output
@@ -145,11 +147,17 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for y in range(game_state['board']['height']):
         map1 = []
         for x in range(game_state['board']['width']):
+            a = False
             for snake in game_state['board']['snakes']:
                 for body in snake['body']:
                     if body['x'] == x and body['y'] == y:
+                        a = True
                         map1.append(1)
-                map1.append(0)
+                        break
+                if a:
+                    break
+            if a:
+                break
         map.append(map1)
 
 
