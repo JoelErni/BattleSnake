@@ -10,21 +10,11 @@
 # To get you started we've included code to prevent your Battlesnake from moving backwards.
 # For more info see docs.battlesnake.com
 
-from curses import beep
-from distutils.file_util import move_file
-from genericpath import exists
-from inspect import ismodule
 import math
-from os import link
 import random
 from re import A
-from secrets import choice
-import string
-from subprocess import check_output
 from sys import flags
-from turtle import right
 import typing
-from xxlimited import foo
 
 # info is called when you create your Battlesnake on play.battlesnake.com
 # and controls your Battlesnake's appearance
