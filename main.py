@@ -181,31 +181,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = "right"
     elif my_head['x'] > nearest_food['x']:
         next_move = "left"
-        
-    #acount and ccount
-    oben = map[my_head['x']][my_head['y']-1]
-    unten = map[my_head['x']][my_head['y']+1]
-    links =  map[my_head['x']-1][my_head['y']]
-    rechts = map[my_head['x']+1][my_head['y']]
-
-    if aCount > cCount:
-        if oben == 'a':
-            next_move='up'
-        elif unten == 'a':
-            next_move='down'
-        elif links == 'a':
-            next_move='left'
-        elif rechts == 'a':
-            next_move='right'
-    elif aCount < cCount:
-        if oben == 'c':
-            next_move='up'
-        elif unten == 'c':
-            next_move='down'
-        elif links == 'c':
-            next_move='left'
-        elif rechts == 'c':
-            next_move='right'
 
     if not next_move in safe_moves:
         next_move = random.choice(safe_moves)
