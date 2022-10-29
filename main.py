@@ -195,10 +195,30 @@ def move(game_state: typing.Dict) -> typing.Dict:
         unten = map[my_head['y']-1][my_head['x']]
     else:
         unten = ''
+    bac = [oben, unten, links, rechts]
     print(f'oben:{oben}, unten: {unten}, links:{str(links)}, rechts:{str(rechts)}')
 
     if not next_move in safe_moves:
-        next_move = random.choice(safe_moves)
+        if aCount > cCount:
+            if oben == 'a':
+                next_move = 'up'
+            elif unten == 'a':
+                next_move = 'down'
+            elif rechts == 'a':
+                next_move = 'right'
+            elif links == 'a':
+                next_move = 'left'
+        elif cCount > aCount:
+            if oben == 'c':
+                next_move = 'up'
+            elif unten == 'c':
+                next_move = 'down'
+            elif rechts == 'c':
+                next_move = 'right'
+            elif links == 'c':
+                next_move = 'left'
+        elif cCount == aCount:
+            next_move = random.choice(safe_moves)
 
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
