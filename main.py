@@ -181,10 +181,10 @@ def move(game_state: typing.Dict) -> typing.Dict:
         rechts = ''
 
     if not my_head['x']==0:
-        rechts = map[my_head['y']][my_head['x']-1]
+        links = map[my_head['y']][my_head['x']-1]
     else:
-        rechts = ''
-    print(f'rechts:{str(rechts)}, links:{str(rechts)}')
+        links = ''
+    print(f'rechts:{str(rechts)}, links:{str(links)}')
 
     if not next_move in safe_moves:
         next_move = random.choice(safe_moves)
