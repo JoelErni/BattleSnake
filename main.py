@@ -116,7 +116,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         food_distance.append(math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2)))
 
     nearest_food = game_state['board']['food'][food_distance.index(min(food_distance))]
-    print(f"snake:{game_state['you']['body']}\nnearest fruit:{nearest_food}")
+    print(f"snake:{game_state['you']['body'][0]}\nnearest fruit:{nearest_food}")
     
     next_move = ""
     if my_head['x'] == nearest_food['x']:
@@ -173,7 +173,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if y < len(matrix) - 1:
                 floodfill(matrix,x,y+1)
 
-    floodfill(map, game_state['you']['body']['x'], game_state['you']['body']['y'])
+    floodfill(map, game_state['you']['body'][0]['x'], game_state['you']['body'][0]['y'])
     print(mapoutput(map))
     return {"move": next_move}
 # Start server when `python main.py` is run
