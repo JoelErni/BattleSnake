@@ -52,7 +52,7 @@ def end(game_state: typing.Dict):
 # Valid moves are "up", "down", "left", or "right"
 # See https://docs.battlesnake.com/api/example-move for available data
 def move(game_state: typing.Dict) -> typing.Dict:
-
+    print(f"MOVE {game_state['turn']}: {next_move}")
     is_move_safe = {"up": True, "down": True, "left": True, "right": True}
 
     # We've included code to prevent your Battlesnake from moving backwards
@@ -117,8 +117,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
         food_distance.append(math.sqrt(math.pow(my_head['x']-x['x'],2)+math.pow(my_head['y']-x['y'],2)))
 
     nearest_food = game_state['board']['food'][food_distance.index(min(food_distance))]
-    
-
     print(f"snake:{my_head}\nnearest fruit:{nearest_food}")
     
     next_move = ""
@@ -142,7 +140,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         for body in snake['body']:
             takenSurface=takenSurface+1
     freeSurface = totalSurface - takenSurface
-    print(f"Total:{totalSurface}\nTaken:{takenSurface}\nFree:{freeSurface}")
+    print(f"Total:{totalSurface}, Taken:{takenSurface}, Free:{freeSurface}")
 
     map = []
     for y in reversed(range(game_state['board']['height'])):
@@ -177,7 +175,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     floodfill(map, my_head['x'], my_head['y'])
     print(mapoutput(map))
-    print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
 # Start server when `python main.py` is run
 if __name__ == "__main__":
