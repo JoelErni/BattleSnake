@@ -152,8 +152,10 @@ def move(game_state: typing.Dict) -> typing.Dict:
                     if body['x'] == x and body['y'] == y:
                         map1.append(1)
                         break
-            continue
-            map1.append(0)
+
+            else:
+                continue
+                map1.append(0)
         map.append(map1)
 
     print(map)
