@@ -134,7 +134,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         return output
 
     def floodfill(matrix, x, y):
-        if matrix[x][y] == "b":  
+        if matrix[x][y] == "a":  
             matrix[x][y] = "c" 
             if x > 0:
                 floodfill(matrix,x-1,y)
