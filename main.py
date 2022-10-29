@@ -11,8 +11,10 @@
 # For more info see docs.battlesnake.com
 
 import math
+from os import link
 import random
 from re import A
+from readline import replace_history_item
 from sys import flags
 import typing
 
@@ -172,6 +174,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = "right"
     elif my_head['x'] > nearest_food['x']:
         next_move = "left"
+
+    links = map[my_head['y']][my_head['x']+1]
+    rechts = map[my_head['y']][my_head['x']-1]
+
+    print(links, rechts)
 
     if not next_move in safe_moves:
         next_move = random.choice(safe_moves)
